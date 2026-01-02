@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WhatsApp UI Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #e5ddd5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .app {
+            width: 360px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header */
+        .header {
+            background: #075e54;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 20px;
+        }
+
+        .header span {
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Tabs */
+        .tabs {
+            background: #075e54;
+            display: flex;
+            color: #fff;
+        }
+
+        .tabs div {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .tabs .active {
+            border-bottom: 3px solid #fff;
+            font-weight: bold;
+        }
+
+        /* Chat List */
+        .chat-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .chat {
+            display: flex;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .chat:hover {
+            background: #f5f5f5;
+        }
+
+        .chat img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        .chat-info {
+            flex: 1;
+        }
+
+        .chat-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .chat-info p {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .chat-time {
+            font-size: 11px;
+            color: gray;
+        }
+
+        /* Floating Button */
+        .fab {
+            position: absolute;
+            bottom: 30px;
+            width: 55px;
+            height: 55px;
+            background: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            right: calc(50% - 150px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <h1>WhatsApp</h1>
+            <span>⋮</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div>Camera</div>
+            <div class="active">Chats</div>
+            <div>Status</div>
+            <div>Calls</div>
+        </div>
+
+        <!-- Chat List -->
+        <div class="chat-list" id="chatList"></div>
+    </div>
+
+    <div class="fab">💬</div>
+
+    <script>
+        const chats = [
+            { name: "Alex", msg: "Hey! How are you?", time: "2:15 PM" },
+            { name: "Catherine", msg: "Let's meet tomorrow", time: "1:10 PM" },
+            { name: "Robert", msg: "Project done 👍", time: "12:05 PM" },
+            { name: "Katie", msg: "Call me when free", time: "11:45 AM" },
+            { name: "Jack", msg: "Thanks!", time: "Yesterday" },
+            { name: "Luis", msg: "See you soon", time: "Yesterday" }
+        ];
+
+        const chatList = document.getElementById("chatList");
+
+        chats.forEach(chat => {
+            chatList.innerHTML += `
+      <div class="chat">
+        <img src="https://i.pravatar.cc/150?u=${chat.name}">
+        <div class="chat-info">
+          <h4>${chat.name}</h4>
+          <p>${chat.msg}</p>
+        </div>
+        <div class="chat-time">${chat.time}</div>
+      </div>
+    `;
+        });
+    </script>
+
+</body>
+
+</html>

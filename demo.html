@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ----------------------
+        1. BASE STYLES & TYPOGRAPHY
+        ----------------------
+        */
+        :root {
+            /* Define your color palette here */
+            --primary-color: #3498db;
+            /* Blue */
+            --secondary-color: #e74c3c;
+            /* Red */
+            --background-dark: #2c3e50;
+            /* Dark Blue/Gray */
+            --text-light: #ecf0f1;
+            /* Light Gray */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* Add smooth scrolling for all anchor links */
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            /* Replace with a Google Font */
+            color: var(--text-light);
+            background-color: var(--background-dark);
+        }
+
+        section {
+            padding: 100px 5%;
+            min-height: 100vh;
+        }
+
+        /* ----------------------
+        2. STICKY NAV BAR 
+        ----------------------
+        */
+        .navbar {
+            background: rgba(44, 62, 80, 0.95);
+            /* Semi-transparent dark background */
+            padding: 15px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: aqua 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            transition: 1s;
+            text-decoration: underline;
+            color: aqua;
+        }
+
+        .head {
+            margin-top: 15%;
+        }
+
+        .name {
+            font-size: 50px;
+        }
+
+
+
+        .cta-button {
+            text-decoration: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            margin-top: 10px;
+
+            background-color: rgb(169, 250, 236);
+            /* background-color: rgb(88, 250, 223); */
+            border-radius: 10px;
+            color: rgba(0, 0, 0, 0.699);
+            box-shadow: rgba(2, 252, 239, 0.993) 0px 0px 20px;
+
+        }
+
+        .cta-button:hover {
+            background-color: aqua;
+        }
+
+
+        /* .img {
+            margin-left: 60%;
+            width: 350px;
+            height: 350px;
+            border: solid aqua 7px;
+            border-radius: 50%;
+            object-fit: contain;
+            box-shadow: rgba(2, 252, 239, 0.993) 0px 5px 50px;
+            background-color: rgb(169, 250, 236);
+
+        } */
+
+
+        .profile-container {
+            margin-top: 15%;
+            margin-left: 20%;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* Initial glow color */
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            animation: glow-pulse 5s infinite ease-in-out;
+        }
+
+        .profile-img {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid aqua;
+            background-color: rgb(169, 250, 236);
+
+            /* The solid inner ring */
+        }
+
+        /* The Animation Keyframes */
+        @keyframes glow-pulse {
+            0% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+                transform: scale(1);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(0, 255, 255, 0.9);
+                transform: scale(1.02);
+                /* Slight pulse movement */
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+                transform: scale(1);
+            }
+        }
+
+        #about {
+            text-align: center;
+
+        }
+
+        .img {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+
+        }
+
+
+
+        /* Burger Menu Icon (Hidden on desktop) */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text-light);
+        }
+
+        /* ----------------------
+        3. SKILLS SECTION (Skill Bars)
+        ----------------------
+        */
+        .skill-bar-container {
+            width: 100%;
+            background-color: #555;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .skill-bar {
+            /* background-color: var(--primary-color); */
+            background: linear-gradient(90deg, #667eea, #00e5ff);
+            color: white;
+            padding: 5px 10px;
+            text-align: right;
+            border-radius: 20px;
+            /* Initial state for animation */
+            width: 0;
+            transition: width 1.5s ease-out;
+            /* The animation */
+        }
+
+        .skill {
+
+            text-align: center;
+        }
+
+        /* Class added by JS to start animation */
+        /* .skill-bar.animate { */
+        /* Widths will be set by JS dynamically based on skill level */
+        /* } */
+
+        /* ----------------------
+        4. PROJECTS SECTION (Project Cards & Hover Effect)
+        ----------------------
+        */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: #34495e;
+            /* Slightly lighter dark color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            /* Hover Effect */
+            box-shadow: 0 10px 20px aqua;
+        }
+
+
+        .details {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            margin-top: 10px;
+            background-color: aqua;
+            color: rgba(0, 0, 0, 0.699);
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: rgba(2, 252, 239, 0.993) 0px 0px 20px;
+            background-color: rgb(169, 250, 236);
+
+
+        }
+
+        .details:hover {
+            background-color: aqua;
+        }
+
+        #projects {
+            text-align: center;
+        }
+
+
+
+        /* ----------------------
+        5. CONTACT FORM (Stylish Contact Form)
+        ----------------------
+        */
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 70%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid aqua;
+            border-radius: 10px;
+            background: #44607a;
+            color: var(--text-light);
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: rgb(169, 250, 236);
+            color: rgba(0, 0, 0, 0.699);
+            padding: 10px 50px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: rgba(2, 252, 239, 0.993) 0px 0px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            /* transition: background-color 0.3s; */
+        }
+
+        .contact-form button:hover {
+            background-color: aqua;
+            /* Darker red on hover */
+        }
+
+        .contact{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+        }
+
+        .h1 {
+            padding-left: 12%;
+        }
+
+
+
+
+        /* ----------------------
+        6. MEDIA QUERIES (Responsiveness)
+        ----------------------
+        */
+        @media (max-width: 768px) {
+
+            /* Show burger menu, hide standard nav links */
+            .burger-menu {
+                display: block;
+            }
+
+            .nav-links {
+                /* Initial state: hidden off-screen */
+                position: absolute;
+                top: 60px;
+                /* Below the navbar */
+                left: 0;
+                width: 100%;
+                background: var(--background-dark);
+                display: flex;
+                flex-direction: column;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 999;
+                padding: 20px 0;
+            }
+
+            /* Class added by JS to display the menu */
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links a {
+                margin: 10px 20px;
+                padding: 10px 0;
+                border-bottom: 1px solid #555;
+            }
+
+            /* Adjust section padding for mobile */
+            section {
+                padding: 80px 3%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">My Portfolio</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="burger-menu" id="burger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home">
+            <div class="img">
+                <div class="head">
+                    <h1>Hello,It's Me</h1><br>
+                    <h1 class="name">Hasanul Banna</h1><br>
+                    <h1>And I'm a Front </h1><br>
+                    <p>I'm a Web Designer and As a Fresher expreties is create and Website design,
+                        Frontend design, and many more...</p><br><br>
+                    <i class="fa-brands fa-instagram" style="color: #ffff;"></i>
+                    <i class="fa-brands fa-twitter" style="color:#ffff ;"></i>
+                    <i class="fa-brands fa-facebook " style="color: #ffff;"></i>
+
+                </div>
+
+                <div class="profile-container">
+                    <img src="img/banna.png" class="profile-img">
+                </div>
+
+            </div>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </section>
+
+        <section id="about">
+            <h1>About Me</h1> <br> <br>
+            <p>
+                Recent B.Sc. Computer Science graduate with a solid
+                foundation in computer fundamentals and a growing passion
+                for technology. Skilled in frontend development (HTML, CSS,
+                JavaScript) and experienced with Bootstrap for building
+                responsive web interfaces. Proficient in Python and SQL for
+                programming, data handling, and database management.
+                Competent in MS Excel and MS Word for data organization,
+                analysis, and documentation. A fast learner with a positive
+                attitude, eager to begin a professional career in a dynamic and
+                growth-oriented environment while continuously enhancing
+                both technical and soft skills....
+            </p>
+            <br>
+
+            <p>
+
+                I am writing to express my interest in the Python Developer position at your esteemed organization. I
+                have completed my Bachelor of Science (B.Sc) from Khadir Mohideen College, Adirampattinam (2025) and
+                recently finished a Python Developer course (2025), where I gained strong knowledge in Python
+                programming, object-oriented concepts, web development, and database management.
+
+                During my course, I worked on several mini-projects that helped me understand real-world applications of
+                Python, including data handling, web scripting, and automation. I am particularly interested in software
+                development and eager to contribute to innovative projects where I can apply my technical and analytical
+                skills.
+
+                As a fresher, I am highly motivated to learn, adapt, and grow in a professional environment. I believe
+                that your organization will provide the right platform to start my career and enhance my abilities as a
+                developer.
+
+                I would be grateful for the opportunity to discuss how I can contribute to your team. Thank you for
+                considering my application. I look forward to your positive response.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h1 class="skill">Skills</h1><br><br>
+
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-level="75">HTML (75%)</div>
+            </div>
+
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-level="60">CSS (60%)</div>
+            </div>
+
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-level="30">JavaScript (30%)</div>
+            </div>
+
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-level="50">Python (50%)</div>
+            </div>
+
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-level="40">SQL (40%)</div>
+            </div>
+
+
+        </section>
+
+        <section id="projects">
+            <h1>Projects</h1><br><br>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Project E-Commerce Website</h3>
+                    <p>A description of Project E-Commerce Website ...</p><br>
+                    <a href="C:\Users\rasool\Desktop\BANNAH\index.html" class="details">Click On</a>
+                </div>
+                <div class="project-card">
+                    <h3>Project Pyhton</h3>
+                    <p>A description of Project Pyhton...</p><br>
+                    <a href="file:///C:/Users/rasool/Desktop/front-end/index.html" class="details">Click On</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h1 class="h1">Contact</h1><br><br>
+            <div class="contact"  >
+                <form class="contact-form" id="contact-form">
+                    <input type="text" placeholder="Your Name" required><br>
+                    <input type="email" placeholder="Your Email" required><br>
+                    <textarea rows="6" placeholder="Your Message" required></textarea><br>
+                    <button type="submit">Send Message</button>
+                </form> 
+                <div class="p">
+                    <p>Motivated and detail-oriented B.Sc. Computer
+                        Science graduate with foundational skills in
+                        frontend development and office productivity
+                        tools. Completed training in Python and SQL,
+                        gaining hands-on experience in programming
+                        and database management. Eager to apply
+                        technical knowledge and problem-solving
+                        abilities in a growth-oriented organization.
+                        Seeking a challenging entry-level role to
+                        enhance learning, develop practical skills, and
+                        contribute to team success.</p><br><br>
+                    <p> <i class="fa-solid fa-envelope"></i> phasanulbanna367@gmail.com</p><br>
+                    <p><i class="fa-solid fa-phone"></i> 8122319801</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+  <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const burgerMenu = document.getElementById('burger-menu');
+            const skillBars = document.querySelectorAll('.skill-bar');
+            
+            // --- Mobile Burger Menu Toggle ---
+            burgerMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // --- Close menu when a link is clicked (on mobile) ---
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+
+            // --- Animated Skill Bars (on scroll into view) ---
+            // Intersection Observer is the modern way to check if an element is visible
+            const skillObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // The 'Skills' section is visible
+                        skillBars.forEach(bar => {
+                            const level = bar.getAttribute('data-level');
+                            // Set the width, triggering the CSS transition/animation
+                            bar.style.width = level + '%';
+                            bar.classList.add('animate');
+                        });
+                        // Stop observing once the animation has run
+                        skillObserver.unobserve(entry.target); 
+                    }
+                });
+            }, {
+                // Trigger when 10% of the 'Skills' section is visible
+                threshold: 0.1 
+            });
+
+            // Start observing the 'Skills' section
+            const skillsSection = document.getElementById('skills');
+            if (skillsSection) {
+                skillObserver.observe(skillsSection);
+            }
+            
+            // --- Smooth Scrolling via JS (Fallback/Alternative) ---
+            // If you removed scroll-behavior: smooth from CSS, use this:
+            /*
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            */
+            
+            // --- Basic Contact Form Validation (Optional) ---
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    // Prevent actual submission for a portfolio static site demo
+                    e.preventDefault(); 
+                    
+                    // Add more robust validation here if needed
+                    alert('Thank you for your message! (Form submission simulated)');
+                    this.reset(); // Clear the form
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

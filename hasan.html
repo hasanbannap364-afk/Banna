@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url(back\ img.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .form {
+            color: #f2f4f7;
+            width: 20%;
+            margin-top: 200px;
+            margin-left: 500px;
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0 0 40px, 0px 0px 40px;
+            border-radius: 40px;
+        }
+
+        input::placeholder {
+            color: white;
+
+        }
+
+        input {
+            width: 90%;
+            padding: 7px;
+            border-radius: 30px;
+            box-shadow: 0px 10px 20px, 0px 6px 6px;
+            background: transparent;
+
+        }
+
+        button {
+            width: 90%;
+            padding: 7px;
+            border-radius: 30px;
+            box-shadow: 1px 1px 2px 2px;
+            background: transparent;
+            /* color: white;  */
+            background: transparent;
+            color: white;
+
+
+        }
+
+        button:hover {
+            color: black;
+            transition-duration: 2s;
+        }
+
+        a {
+            margin: 70px;
+        }
+
+
+
+        h1 {
+            text-align: center;
+            color: white;
+            transition-duration: 2s;
+
+
+        }
+
+        h1:hover {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" class="form" id="form">
+        <h1>LOGIN</h1>
+        <input type="text" placeholder="User / Email" required><br><br>
+
+        <input type="password" placeholder="Password" required><br><br>
+
+        <button type="submit">login</button><br><br>
+        <a href="index.html">click</a>
+    </form>
+
+    <script>
+        // This will now work because the ID 'form' exists above
+        const form = document.getElementById('form');
+
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevents page reload
+
+                alert('Login Succefull!');
+                this.reset(); // Clears the input fields
+            });
+        }
+    </script>
+
+</body>
+
+</html>
