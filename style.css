@@ -173,7 +173,7 @@ body {
     border-radius: 10px;
     background-color: #f2f4f7;
     border: none;
-    width: 50%;
+    width: 80%;
 }
 
 .news {
@@ -239,7 +239,7 @@ body {
 }
 
 
-.product-search input::placeholder{
+.product-search input::placeholder {
     color: #f2f4f7;
 }
 
@@ -272,6 +272,7 @@ body {
     margin-left: 25%;
     margin-top: 80px;
     margin-bottom: 10%;
+    margin-right: 25%;
     width: 50%;
     padding-top: 60px;
     padding-bottom: 70px;
@@ -335,6 +336,11 @@ button {
 
     .service-container-2 {
         flex-direction: column;
+    }
+
+    .contact{
+        width: 95%;
+        margin-left: 2.9%;
     }
 
 

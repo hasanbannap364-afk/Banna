@@ -6,21 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            padding: 0%;
+            margin: 0%;
+        }
+
+
         body {
-            background-image: url(back\ img.jpeg);
+            background-image: url(img/back\ img.jpeg);
             background-repeat: no-repeat;
             background-size: cover;
         }
 
         .form {
             color: #f2f4f7;
-            width: 20%;
+            width: 25%;
             margin-top: 200px;
-            margin-left: 500px;
+            margin-left: 40%;
             text-align: center;
             padding: 30px;
             box-shadow: 0 0 40px, 0px 0px 40px;
             border-radius: 40px;
+
         }
 
         input::placeholder {
@@ -71,6 +80,16 @@
 
         h1:hover {
             color: blue;
+        }
+
+        @media (max-width:700px) {
+            .form {
+                width: 95%;
+                margin: 1%;
+                margin-top: 200px;
+
+            }
+
         }
     </style>
 </head>
